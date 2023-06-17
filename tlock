@@ -1,0 +1,67 @@
+#!/data/data/com.termux/files/usr/bin/python3
+from sys import argv
+from os import system
+from hashlib import sha256
+import getpass
+path = '/data/data/com.termux/files/usr/etc/.login'
+
+def warning() -> None:
+    print("Usage: tlock [OPTION] \nTry 'tlock --help' for more information.")
+
+def help_() -> None:
+    print("Usage: tlock [OPTION]\nOptions:\n    --help                        get help\n    --change-password             to update your password\n    --uninstall                   uninstall it from your device\n    --reinstall                   reinstall the script")
+
+def changePassword() -> None:
+    f = open('{}/test'.format(path),'r')
+    passwd = f.read() [0:-1]
+    f.close()
+    password = sha256(getpass.getpass(prompt='Current password:').encode('utf-8')).hexdigest()
+    if passwd != password:
+        print("Invalid password. Try Again ...")
+        changePassword()
+        return
+    def newpaas() -> str:
+        pass1 = getpass.getpass(prompt='Enter new password:') 
+        pass2 = getpass.getpass(prompt='Confirm new password:')
+        if pass1 == pass2:
+            p = pass1
+        else:
+            print("Password does not match")
+            p = newpaas()
+        return p
+    p = sha256(newpaas().encode('utf-8')).hexdigest()+'\n'
+    f = open('{}/test'.format(path),'w')
+    f.write(p)
+    f.close()
+
+def unInstall() -> None:
+    def deleteS(file_path):
+        with open(file_path, 'r') as file:
+            lines = file.readlines()
+        if len(lines) >= 2:
+            del lines[1]
+        with open(file_path, 'w') as file:
+            file.writelines(lines)
+    input_ = input("Do you want to uninstall?(y/n)")
+    if input_ == 'y' or input_ == 'Y':
+        system('rm -rf {} {}'.format(path,argv[0]))
+        deleteS('/data/data/com.termux/files/usr/bin/login')
+    else:
+        print("Abort")
+        exit()
+
+try:
+    command = argv[1]
+except IndexError:
+    warning()
+    exit()
+
+if command == '--help':
+    help_()
+elif command == '--change-password':
+    changePassword()
+elif command == '--uninstall':
+    unInstall()
+else:
+    warning()
+

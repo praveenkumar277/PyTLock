@@ -1,0 +1,38 @@
+#!/data/data/com.termux/files/usr/bin/python3
+import os, getpass, hashlib
+code = os.system('pip install psutil')
+if code != 0:
+    exit()
+
+def addline(filename, new_line):
+    with open(filename, 'r') as file:
+        lines = file.readlines()
+    with open(filename, 'w') as file:
+        file.write(lines[0])  
+        file.write(new_line + '\n') 
+        for line in lines[1:]:
+            file.write(line)
+
+def main(name) -> None:
+    os.system('mkdir /data/data/com.termux/files/usr/etc/.login')
+    os.system('cp * /data/data/com.termux/files/usr/etc/.login/ ')
+    os.system('cp tlock /data/data/com.termux/files/usr/bin/')
+    passwd = str()
+    while True:
+        passwd1 = getpass.getpass(prompt='New Password:')
+        passwd2 = getpass.getpass(prompt='Retype Password:')
+        if passwd1 == passwd2:
+            passwd = passwd1
+            break
+        else:
+            continue
+    passwd = hashlib.sha256(passwd.encode('utf-8')).hexdigest()
+    try:
+        addline('/data/data/com.termux/files/usr/bin/login','python3 /data/data/com.termux/files/usr/etc/.login/login')
+    except KeyboardInterrupt:
+        pass
+    f = open('/data/data/com.termux/files/usr/etc/.login/passwd','w')
+    f.write(passwd+'\n')
+    f.close()
+main('run')
+
