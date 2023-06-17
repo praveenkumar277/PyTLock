@@ -33,7 +33,7 @@ def getPasswd(path) -> None:
         password = getpass.getpass(prompt=prompt)
         password = sha256(password.encode('utf-8')).hexdigest()
         if password in passwd:
-            system('rm {}/hang'.format(path))
+            system('rm {}/hang 2> /dev/null'.format(path))
             system('clear')
             break
         else:
