@@ -15,7 +15,7 @@ PyTLock is a simple and lightweight tool for securing your Termux environment on
 - Resource-friendly
 
 ## Prerequisites
-- Termux app installed on your Android device (Download from [**F-Droid**] (https://f-droid.org/en/packages/com.termux/))
+- Termux app installed on your Android device (Download from [F-Droid](https://f-droid.org/en/packages/com.termux/))
 - Android device running Android version 7.0 (Nougat) or later
 
 ## Installation
@@ -49,7 +49,7 @@ Contributions are welcome and appreciated! If you would like to contribute to Py
 > Please ensure that your code follows the existing coding style and includes appropriate documentation.
 
 ## License
-This project is licensed under the [**MIT License**] (./LICENSE).
+This project is licensed under the [MIT License](./LICENSE).
 
 ## Acknowledgements
 Termux Lock was inspired by the need for enhanced security in Termux environments. Special thanks to the open-source community for their contributions.
