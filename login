@@ -48,6 +48,9 @@ def main(path) -> None:
             getPasswd(path)
         except KeyboardInterrupt:
             system('killall -9 bash')
+        except EOFError:
+            system('clear')
+            main(path)
     else:
         pass
 
